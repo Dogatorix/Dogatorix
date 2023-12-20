@@ -1,7 +1,3 @@
-```zsh
-> neofetch
-```
-
 <img align="left" src="https://dogatorix.com/avatar/728394648174723192" alt="My Current Avatar" width="280" /> 
 
 ```csharp
