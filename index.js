@@ -95,19 +95,24 @@ async function getTotalCommits(requests, contributor, cutoffDate) {
   let totalCommits = 0;
 
   repos.forEach((repo) => {
-    const contributorName = (item) => item.author.login === contributor;
-    const indexOfContributor = repo.data.findIndex(contributorName);
+    if (Array.isArray(repo.data)) {
+      const contributorName = (item) => item.author.login === contributor;
+      const indexOfContributor = repo.data.findIndex(contributorName);
 
-    if (indexOfContributor !== -1) {
-      const contributorStats = repo.data[indexOfContributor];
-      totalCommits += !cutoffDate
-        ? computeCommitsFromStart(contributorStats)
-        : computeCommitsBeforeCutoff(contributorStats, cutoffDate);
+      if (indexOfContributor !== -1) {
+        const contributorStats = repo.data[indexOfContributor];
+        totalCommits += !cutoffDate
+          ? computeCommitsFromStart(contributorStats)
+          : computeCommitsBeforeCutoff(contributorStats, cutoffDate);
+      }
+    } else {
+      console.warn(`Unexpected data structure in repo.data for ${repo.full_name}`);
     }
   });
 
   return totalCommits;
 }
+
 
 function computeCommitsFromStart(contributorData) {
   return contributorData.total;

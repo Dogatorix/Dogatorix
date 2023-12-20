@@ -7,13 +7,11 @@
 ```csharp
 dogatorix@github
 -------------------------
-OS: Arch Linux x86_64
-Shell: zsh 5.8
 Frameworks: React, Express, PostgreSQL, Three.js
 Languages: JavaScript, TypeScript, HTML, CSS, Java, C++/C#, Python
 Learning: Deno, Bun, Fresh
 Hobbies: Baking, Cooking, Gaming
-Commits: 170
+Commits: 172
 Repos: 33 (2 Public)
 Discord: @dogatorix
 ```
