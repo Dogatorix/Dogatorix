@@ -1,7 +1,7 @@
 {
   "name": "dogatorix",
   "version": "1.0.0",
-  "description": " GitHub Profile README",
+  "description": " GitHub Profile README Generator",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
