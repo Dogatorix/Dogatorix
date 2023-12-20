@@ -1,7 +1,7 @@
 {
-  "name": "anordinaryusername",
+  "name": "dogatorix",
   "version": "1.0.0",
-  "description": "A profile README that kind of looks like a neofetch",
+  "description": " GitHub Profile README",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -10,16 +10,16 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/AnOrdinaryUsername/AnOrdinaryUsername.git"
+    "url": "git+https://github.com/Dogatorix/Dogatorix.git"
   },
-  "author": "AnOrdinaryUsername",
+  "author": "Dogatorix",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/AnOrdinaryUsername/AnOrdinaryUsername/issues"
+    "url": "https://github.com/Dogatorix/Dogatorix/issues"
   },
-  "homepage": "https://github.com/AnOrdinaryUsername/AnOrdinaryUsername#readme",
+  "homepage": "https://github.com/Dogatorix/Dogatorix#readme",
   "dependencies": {
-    "@octokit/rest": "^18.5.5",
+    "@octokit/rest": "^20.0.2",
     "dotenv": "^10.0.0",
     "mustache": "^4.2.0"
   },

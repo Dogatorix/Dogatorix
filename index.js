@@ -3,8 +3,12 @@ const Mustache = require("mustache");
 const fs = require("fs");
 const { Octokit } = require("@octokit/rest");
 
+// Set your personal access token
+const token = process.env.GH_ACCESS_TOKEN;
+const githubUsername = process.env.GH_USERNAME;
+
 const octokit = new Octokit({
-  auth: process.env.GH_ACCESS_TOKEN,
+  auth: token,
   userAgent: "readme v1.0.0",
   baseUrl: "https://api.github.com",
   log: {
@@ -14,15 +18,41 @@ const octokit = new Octokit({
 });
 
 async function grabDataFromAllRepositories() {
-  // Options under "List repositories for the authenticated user"
-  // https://octokit.github.io/rest.js/v18#authentication
   const options = {
     per_page: 100,
   };
 
-  // https://docs.github.com/en/rest/reference/repos#list-repositories-for-the-authenticated-user
-  const request = await octokit.rest.repos.listForAuthenticatedUser(options);
-  return request.data;
+  try {
+    const request = await octokit.rest.repos.listForAuthenticatedUser(options);
+
+    const validRepos = await Promise.all(
+      request.data.map(async (repo) => {
+        try {
+          // Check if the repository exists
+          await octokit.rest.repos.get({
+            owner: githubUsername,
+            repo: repo.name,
+          });
+          return repo;
+        } catch (error) {
+          console.warn(`Repository ${repo.owner.login}/${repo.name} not found. Skipping.`);
+          return null;
+        }
+      })
+    );
+
+    // Filter out null values (repositories that couldn't be verified)
+    const filteredRepos = validRepos.filter((repo) => repo !== null);
+
+    if (filteredRepos.length === 0) {
+      throw new Error('No valid repositories found.');
+    }
+
+    return filteredRepos;
+  } catch (error) {
+    console.error('Error retrieving repository data:', error.message);
+    throw error;
+  }
 }
 
 function calculateTotalStars(data) {
@@ -32,10 +62,9 @@ function calculateTotalStars(data) {
 }
 
 async function calculateTotalCommits(data, cutoffDate) {
-  const contributorsRequests = [];
-  const githubUsername = process.env.GH_USERNAME;
 
-  data.forEach((repo) => {
+
+  const contributorsRequests = data.map((repo) => {
     const options = {
       owner: githubUsername,
       repo: repo.name,
@@ -44,15 +73,16 @@ async function calculateTotalCommits(data, cutoffDate) {
     const lastRepoUpdate = new Date(repo.updated_at);
 
     if (!cutoffDate || lastRepoUpdate > cutoffDate) {
-      // https://docs.github.com/en/rest/reference/repos#get-all-contributor-commit-activity
-      const repoStats = octokit.rest.repos.getContributorsStats(options);
-
-      contributorsRequests.push(repoStats);
+      return octokit.rest.repos.getContributorsStats(options);
     }
+
+    return undefined;
   });
 
+  const validContributorsRequests = contributorsRequests.filter(Boolean);
+
   const totalCommits = await getTotalCommits(
-    contributorsRequests,
+    validContributorsRequests,
     githubUsername,
     cutoffDate
   );
@@ -85,7 +115,6 @@ function computeCommitsFromStart(contributorData) {
 
 function computeCommitsBeforeCutoff(contributorData, cutoffDate) {
   const olderThanCutoffDate = (week) => {
-    // week.w -> Start of the week, given as a Unix timestamp (which is in seconds)
     const MILLISECONDS_IN_A_SECOND = 1000;
     const milliseconds = week.w * MILLISECONDS_IN_A_SECOND;
     const startOfWeek = new Date(milliseconds);
@@ -93,7 +122,6 @@ function computeCommitsBeforeCutoff(contributorData, cutoffDate) {
   };
 
   const newestWeeks = contributorData.weeks.filter(olderThanCutoffDate);
-  // week.c -> Number of commits in a week
   const total = newestWeeks.reduce((sum, week) => sum + week.c, 0);
 
   return total;
@@ -101,18 +129,19 @@ function computeCommitsBeforeCutoff(contributorData, cutoffDate) {
 
 async function updateReadme(userData) {
   const TEMPLATE_PATH = "./main.mustache";
-  await fs.readFile(TEMPLATE_PATH, (err, data) => {
-    if (err) {
-      throw err;
-    }
+  const data = await fs.promises.readFile(TEMPLATE_PATH, "utf-8");
 
-    const output = Mustache.render(data.toString(), userData);
-    fs.writeFileSync("README.md", output);
-  });
+  const output = Mustache.render(data, userData);
+  await fs.promises.writeFile("README.md", output);
 }
+
+
 
 async function main() {
   const repoData = await grabDataFromAllRepositories();
+
+  const repoCount = repoData.length
+  const publicRepos = repoData.filter(repo => !repo.private).length;
 
   const totalStars = calculateTotalStars(repoData);
 
@@ -124,9 +153,8 @@ async function main() {
     lastYear
   );
 
-  // Hex color codes for the color blocks
-  const colors = ["474342", "fbedf6", "c9594d", "f8b9b2", "ae9c9d"];
-  await updateReadme({ totalStars, totalCommitsInPastYear, colors });
+  const colors = ["6B5369", "251522", "402B3E", "160C14", "090308"];
+  await updateReadme({ totalStars, totalCommitsInPastYear, colors, repoCount, publicRepos });
 }
 
 main();
