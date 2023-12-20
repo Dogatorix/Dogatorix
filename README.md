@@ -1,4 +1,4 @@
-<img align="left" src="https://dogatorix.com/avatar/728394648174723192" alt="My Current Avatar" width="280" /> 
+<img align="left" src="https://media1.tenor.com/m/oHK6jpOBWK4AAAAC/littlebigplanet-sackboy.gif" alt="real" width="280"/> 
 
 ```csharp
 dogatorix@github
