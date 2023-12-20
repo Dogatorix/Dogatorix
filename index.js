@@ -107,6 +107,7 @@ async function getTotalCommits(requests, contributor, cutoffDate) {
       }
     } else {
       console.warn(`Unexpected data structure in repo.data for ${repo.full_name}`);
+      console.log(repo)
     }
   });
 
