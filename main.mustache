@@ -7,7 +7,6 @@ Frameworks: React, Express, PostgreSQL, Three.js
 Languages: JavaScript, TypeScript, HTML, CSS, Java, C++/C#, Python
 Learning: Deno, Bun, Fresh
 Hobbies: Baking, Cooking, Gaming
-Commits: 166
 Repos: 33 (3 Public)
 Discord: @dogatorix
 ```
