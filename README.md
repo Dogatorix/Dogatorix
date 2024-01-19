@@ -3,12 +3,11 @@
 ```csharp
 dogatorix@github
 -------------------------
-Skills: Web, Backend, Databases, SVG Graphics, Modding
-Languages: JavaScript, HTML, CSS, Java, C++/C#, Python
-Learning: Deno, TypeScript, Rust
-Hobbies: Baking, Cooking, Gaming, Coding, Drawing
-Commits: 335
-Repos: 37 (5 Public)
+Frameworks: React, Express, PostgreSQL, Three.js
+Languages: JavaScript, TypeScript, HTML, CSS, Java, C++/C#, Python
+Learning: Deno, Bun, Fresh
+Hobbies: Baking, Cooking, Gaming
+Repos: 33 (3 Public)
 Discord: @dogatorix
 ```
 <p align="left">
