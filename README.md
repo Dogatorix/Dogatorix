@@ -7,7 +7,7 @@ Skills: Web, Backend, Databases, SVG Graphics, Modding
 Languages: JavaScript, HTML, CSS, Java, C++/C#, Python
 Learning: Deno, TypeScript, Rust
 Hobbies: Baking, Cooking, Gaming, Coding, Drawing
-Repos: 38 (5 Public)
+Repos: 39 (6 Public)
 Discord: @dogatorix
 ```
 <p align="left">
