@@ -1,4 +1,4 @@
-<img align="left" src="https://media1.tenor.com/m/oHK6jpOBWK4AAAAC/littlebigplanet-sackboy.gif" alt="real" width="280"/> 
+<img align="left" src="https://media1.tenor.com/m/oHK6jpOBWK4AAAAC/littlebigplanet-sackboy.gif" alt="real" width="180"/> 
 
 ```csharp
 dogatorix@github
@@ -7,7 +7,7 @@ Skills: Web, Backend, Databases, SVG Graphics, Modding
 Languages: JavaScript, HTML, CSS, Java, C++/C#, Python, Lua
 Learning: Deno, TypeScript, Rust
 Hobbies: Baking, Cooking, Gaming, Coding, Drawing
-Repos: 47 (7 Public)
+Repos: 48 (7 Public)
 Discord: @dogatorix
 ```
 <p align="left">
