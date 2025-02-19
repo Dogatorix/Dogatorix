@@ -13,7 +13,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checkout project source code
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
 
       - name: Use NodeJs 21.x
         uses: actions/setup-node@v1
