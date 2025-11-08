@@ -6,6 +6,6 @@ dogatorix@github
 Skills: Web, Backend, Databases, SVG Graphics, Modding
 Languages: JavaScript, TypeScript, HTML, CSS, Java, C++/C#, Python, Lua
 Hobbies: Baking, Cooking, Gaming, Coding, Drawing
-Repos: 61 (8 Public)
+Repos: 62 (8 Public)
 Discord: @dogatorix
 ```
